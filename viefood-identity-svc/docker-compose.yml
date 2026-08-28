@@ -1,0 +1,23 @@
+name: viefood-identity
+
+services:
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: viefood-identity-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: viefood
+      POSTGRES_PASSWORD: viefood
+      POSTGRES_DB: viefood_identity
+    ports:
+      - "8601:5432"
+    volumes:
+      - identity_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U viefood -d viefood_identity"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  identity_pgdata:

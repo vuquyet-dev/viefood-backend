@@ -1,0 +1,37 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /identity
+
+spring:
+  application:
+    name: viefood-identity-svc
+  datasource:
+    url: jdbc:postgresql://localhost:8601/viefood_identity
+    username: viefood
+    password: viefood
+#  rabbitmq:
+#    host: localhost
+#    port: 5601
+#    username: vierabbit
+#    password: vierabbit
+  jpa:
+    hibernate:
+      ddl-auto: validate
+        # ddl-auto quyết định cách Hibernate xử lý schema database:
+        # none        : Không kiểm tra và không thay đổi schema.
+        # validate    : Chỉ kiểm tra Entity có khớp database, không tạo/sửa/xóa bảng.
+        # update      : Tự động cập nhật schema theo Entity, phù hợp development.
+        # create      : Xóa schema cũ và tạo lại khi ứng dụng khởi động.
+      # create-drop : Tạo schema khi start và xóa schema khi ứng dụng dừng.
+      # Với project dùng Flyway, nên dùng validate để Flyway quản lý schema.
+  flyway:
+    locations: classpath:db/migration/viefood-base, classpath:db/migration
+
+#logging:
+##   pattern:
+##     console: "%d{HH:mm:ss} %-5level [%thread] %logger{36} : %msg%n"
+
+viefood:
+  messaging:
+    producer: identity-svc

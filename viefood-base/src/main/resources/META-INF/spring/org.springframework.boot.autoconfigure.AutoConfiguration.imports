@@ -1,0 +1,4 @@
+com.viefood.base.web.ViefoodWebAutoConfiguration
+com.viefood.base.config.ApiLoggingConfig
+com.viefood.base.messaging.ViefoodMessagingPackagesAutoConfiguration
+com.viefood.base.messaging.ViefoodMessagingAutoConfiguration
