@@ -1,29 +1,29 @@
 package com.viefood.base.error;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public class ServiceException extends RuntimeException{
+public class ServiceException extends RuntimeException {
     private final ErrorCode errorCode;
     private final Map<String, String> details;
 
-
-    public ServiceException(ErrorCode errorCode)
-    {
-        this(errorCode, errorCode.getDefaultMessage(), Map.of());
-    }
-
-    public ServiceException(ErrorCode errorCode, String message) {
-        this(errorCode, message, Map.of());
+    public ServiceException(ErrorCode errorCode, String field) {
+        this(errorCode, field, errorCode.getDefaultMessage());
     }
 
     public ServiceException(
             ErrorCode errorCode,
-            String message,
-            Map<String, String> details
+            String field,
+            String description
     ) {
-        super(message);
-        this.errorCode = errorCode;
-        this.details = Map.copyOf(details);
+        this.errorCode = Objects.requireNonNull(errorCode, "errorCode must not be null");
+
+        Map<String, String> detailValues = new LinkedHashMap<>();
+        detailValues.put("field", Objects.requireNonNull(field, "field must not be null"));
+        detailValues.put("description", description);
+        this.details = Collections.unmodifiableMap(detailValues);
     }
 
     public ErrorCode getErrorCode() {

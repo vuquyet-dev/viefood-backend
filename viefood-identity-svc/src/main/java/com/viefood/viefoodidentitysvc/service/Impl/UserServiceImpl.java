@@ -16,8 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
-
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -32,9 +30,10 @@ public class UserServiceImpl implements UserService {
     public UserRes register(UserReq request) {
         if (userRepository.existsByUsername(request.getUsername()))
         {
-            throw new ServiceException(ErrorCode.ERR_DATA_DUPLICATE, "Username already exists.", Map.of(
-                    "username", request.getUsername()
-            ));
+            throw new ServiceException(
+                    ErrorCode.ERR_DATA_DUPLICATE,
+                    "username"
+            );
         }
 
         User user = new User();

@@ -50,6 +50,7 @@ public class OutboxEventPublisher {
         } catch (JsonProcessingException ex) {
             throw new ServiceException(
                     ErrorCode.ERR_INTERNAL_ERROR,
+                    null,
                     "Khong serialize duoc payload cua event " + eventType);
         }
 

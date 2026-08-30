@@ -8,14 +8,12 @@ import lombok.Getter;
 @Getter
 @JsonPropertyOrder({"error", "description", "data"})
 public class BaseResponse<T> {
-    private String error;
-    private String description;
+//    private String error;
+//    private String description;
     private T data;
 
-    public static <T> BaseResponse<T> success(T data) {
+    public static <T> BaseResponse<T> of(T data) {
         return BaseResponse.<T>builder()
-                .error(null)
-                .description("Success")
                 .data(data)
                 .build();
     }
@@ -25,8 +23,8 @@ public class BaseResponse<T> {
             String description
     ) {
         return BaseResponse.<T>builder()
-                .error(error)
-                .description(description)
+//                .error(error)
+//                .description(description)
                 .data(null)
                 .build();
     }
